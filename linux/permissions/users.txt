@@ -1,0 +1,3 @@
+piyush:1000:/home/piyush
+appuser:1001:/home/appuser
+root:0:/root

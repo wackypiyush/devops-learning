@@ -1,0 +1,11 @@
+INFO Application started
+INFO Loading configuration
+INFO Connecting to database
+ERROR Database connection failed
+INFO Retrying connection
+ERROR Database connection failed
+WARNING Database response slow
+INFO Connection successful
+INFO Application ready
+ERROR API request failed
+ERROR API request failed
