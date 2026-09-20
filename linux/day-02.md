@@ -36,6 +36,7 @@ There are primary and secondary/supplementary groups.
 Primary groups are Exactly 1 per user. Secondary can be multiple
 Primary groups are automatically created with the same name as the username upon user creation.
 Automatically owns any new file or directory the user creates.
+the user's primary group doesn't necessarily have to have the same name as the username. Ubuntu commonly creates a private group with the same name, which is what you're seeing.
 
 2. Linux Permissions
 file_type owner group others
@@ -56,6 +57,11 @@ Therefore:
 644 = rw-r--r-- 
 600 = rw-------
 
+chmod: changes the file permissions
+chown: change the owner of the file. sudo chown john report.txt
+
+chmod +x file.txt: adds the execute permission to all owner, groups and others
+chmod u+x file.txt: adds execute permission to just the owner
 3. Pipes & Redirection
 Standard output — stdout=Normal successful output
 Standard error — stderr=Error/warning messages
@@ -149,6 +155,8 @@ This shows currently loaded service units.
 You can also see failed services:
 systemctl --failed
 This is very useful during troubleshooting.
+
+systemd is the manager; systemctl is the tool you use to control/query it.
 
 journalctl — Read system/service logs
 Now suppose: systemctl status nginx
