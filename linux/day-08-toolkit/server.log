@@ -1,0 +1,11 @@
+INFO nginx started
+INFO request received
+ERROR database connection failed
+WARN memory usage high
+INFO request completed
+ERROR database timeout
+ERROR database connection failed
+INFO request received
+WARN disk usage high
+INFO request completed
+ERROR HTTP 500
