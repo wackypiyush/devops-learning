@@ -769,132 +769,135 @@ schedule: "0 0 * * *"
 
 Meaning:
 
-```text*Every Day
+```text
+Every Day
 
 At Midnight
 ```
 
 ---
 
-* concurrencyPolicy
+# concurrencyPolicy
 
 Controls:
 
-```*ext
-What*Happens If
-Another Scheduled Run*Arrives
-While A Previous*Job Is Still Active
+```text
+What Happens If
+Another Scheduled Run Arrives
+While A Previous Job Is Still Active
 ```
 
 Values:
 
-*``text
+```text
 Allow
 
 Forbid
 
 Replace
-``*
+```
 
 ---
 
 ## Allow (Default)
 
-```text*Old Job Running
+```text
+Old Job Running
 
-New Schedule Arri*es
+New Schedule Arrives
 
 Start New Job Anyway
 ```
 
 ---
-*##*Forbid
+## Forbid
 
 ```text
 Old Job Running
 
-*ew Schedule Arrives
+New Schedule Arrives
 
-Do*Not Start New Job
+Do Not Start New Job
 ```
 
 Important:
-*```*ext
+```text
 Missed Schedules Are Not
-Autom*tically Guaranteed To Run Later
-``*
+Automatically Guaranteed To Run Later
+```
 
 ---
 
 ## Replace
 
 ```text
-Old Job*Running
+Old Job Running
 
 New Schedule Arrives
 
-Ter*inate Old Job
+Terminate Old Job
 
 Start New Job
 ```
 
-*--
+---
 
 # successfulJobsHistoryLimit
 
-*efines:
+Defines:
 
 ```text
-How*Many Successful Jobs
-Kubernetes Ke*ps
+How Many Successful Jobs
+Kubernetes Keeps
 ```
 
 Example:
 
 ```yaml
-successf*lJobsHistoryLimit:*2
+successfulJobsHistoryLimit: 2
 ```
 
 Meaning:
 
 ```text
-Keep Up T*
-* Recent Successful Jobs
+Keep Up To
+2 Recent Successful Jobs
 ```
 
 ---
 
-*ractical Impact:
+Practical Impact:
 
-```text*Older Successful Jobs
+```text
+Older Successful Jobs
 
-May Be Dele*ed
+May Be Deleted
 
-Their Logs May No Longer Be Av*ilable
+Their Logs May No Longer Be Available
 ```
 
 ---
 
-# failedJobsHisto*yLimit
+# failedJobsHistoryLimit
 
 Defines:
 
 ```text
-How Many*Failed Jobs
+How Many Failed Jobs
 Kubernetes Keeps
 ```
 
-*xample:
+Example:
 
 ```yaml
-failedJobsHistory*imit: 1
+failedJobsHistoryLimit: 1
 ```
 
 Meaning:
 
-```*ext
+```text
 Keep Up To
-1 Failed*Job
+1 Failed Job
 ```
 
 ---
@@ -902,148 +905,149 @@ Keep Up To
 # suspend
 
 Defines:
-*```text
+```text
 Should The CronJob
-*reate New Scheduled Jobs?
+Create New Scheduled Jobs?
 ```
 
----*
+---
 Example:
 
 ```yaml
 suspend: true
-`*`
+`
 
 Meaning:
 
 ```text
-Do Not Start *ew Scheduled Jobs
+Do Not Start New Scheduled Jobs
 ```
 
 ---
 
-Import*nt:
+Important:
 
 ```text
 Already Running Jobs
-*Continue Running
+Continue Running
 ```
 
 ---
 
-To resu*e:
+To resume:
 
 ```yaml
-suspend* false
+suspend: false
 ```
 
 ---
 
-#*Timezone
+# Timezone
 
 Your lab showed:
 
-```tex**TIMEZONE = <none>
+```text
+TIMEZONE = <none>
 ```
 
-*nd logs*displayed:
+And logs displayed:
 
 ```text
-UTC*Time
+UTC Time
 ```
 
 ---
 
-Important*
+Important:
 
 ```text
-CronJob Scheduler Timezo*e
+CronJob Scheduler Timezone
 
-*ND
+AND
 
 Container Timezone
 
-Are Separa*e Concepts
+Are Separate Concepts
 ```
 
 ---
 
 Rules:
 
-```te*t
+```text
 If spec.timeZone Is Not Defined
-*K*bernetes Uses The Controller Manag*r Timezone
+Kubernetes Uses The Controller Manager Timezone
 ```
 
 ---
 
-Container Out*ut:
+Container Output:
 
 ```bash
 date
 ```
 
-may still s*ow:
+may still show:
 
 ```text
 UTC
 ```
 
-even when*scheduling uses another timezone.
-*---
+even when scheduling uses another timezone.
+---
 
 Production Recommendation:
 
-`*`text
+```text
 Explicitly Configure
 
-spec.t*meZone
+spec.timeZone
 
-When Local Time Scheduling*Matters
+When Local Time Scheduling Matters
 ```
 
 ---
 
-# 4. CronJob Sch*dule Format
+# 4. CronJob Schedule Format
 
-Kubernetes CronJobs u*e Linux Cron syntax.
+Kubernetes CronJobs use Linux Cron syntax.
 
 ---
 
-Format:*
+Format:
 ```text
 * * * * *
 │ │ │ │ │
-│ │ │*│ └── Day Of Week (0-7)
-* │ │ └──── Month (1-12)
-│ │ └─────* Day Of*Month (1-31)
-│ └──────── Hour (0-2*)
-└──────────*Minute (0-59)
+│ │ │ │ └── Day Of Week (0-7)
+│ │ │ └──── Month (1-12)
+│ │ └────── Day Of Month (1-31)
+│ └──────── Hour (0-23)
+└────────── Minute (0-59)
 ```
 
 ---
 
-Easy Memor* Trick:
+Easy Memory Trick:
 
 ```text
 Minute
 
 Hour
 
-Day*Of Month
+Day Of Month
 
 Month
 
 Day Of Week
 ```
 
-*--
+---
 
 # Special Characters
 
 ## *
 
-Me*ns:
+Means:
 
 ```text
 Every
@@ -1052,11 +1056,11 @@ Every
 ---
 
 ## ,
-*Means:
+Means:
 
 ```text
 Specific Values
-``*
+```
 
 ---
 
@@ -1065,7 +1069,8 @@ Specific Values
 Means:
 
 ```text
-Range*```
+Range
+```
 
 ---
 
@@ -1074,37 +1079,37 @@ Range*```
 Means:
 
 ```text
-Ev*ry N Units
+Every N Units
 ```
 
 ---
 
-# Cron Schedu*e Reference
+# Cron Schedule Reference
 
 ## Every Minute
 
-```y*ml
+```yaml
 schedule: "* * * * *"
 ```
 
 ---
-*## Every 5 Minutes
+## Every 5 Minutes
 
 ```yaml
-schedu*e: "*/5 * * * *"
+schedule: "*/5 * * * *"
 ```
 
 ---
 
-## Ever* 15 Minutes
+## Every 15 Minutes
 
 ```yaml
-schedule: "*/*5 * * * *"
+schedule: "*/15 * * * *"
 ```
 
 ---
 
-## Every Hour*At Minute 0
+## Every Hour At Minute 0
 
 ```yaml
 schedule: "0 * * * *"
@@ -1112,29 +1117,30 @@ schedule: "0 * * * *"
 
 ---
 
-## Daily At Midn*ght
+## Daily At Midnight
 
 ```yaml
-schedule: "0 0 * * *"*```
+schedule: "0 0 * * *"
+```
 
 ---
 
 ## Daily At 2 AM
 
-```yam*
+```yaml
 schedule: "0 2 * * *"
 ```
 
 ---
 
-#* Every Sunday At Midnight
+# Every Sunday At Midnight
 
-```*aml
+```yaml
 schedule: "0 0 * * 0"
 ```
 
----*
-## First Day Of Every Month At Mi*night
+---
+## First Day Of Every Month At Midnight
 
 ```yaml
 schedule: "0 0 1 * *"
@@ -1142,7 +1148,7 @@ schedule: "0 0 1 * *"
 
 ---
 
-## Daily At 9 AM And 6*PM
+## Daily At 9 AM And 6 PM
 
 ```yaml
 schedule: "0 9,18 * * *"
@@ -1150,7 +1156,7 @@ schedule: "0 9,18 * * *"
 
 ---
 
-## Every Hour From 9 A* Through 5 PM
+## Every Hour From 9 AM Through 5 PM
 
 ```yaml
 schedule: "* 9-17 * * *"
@@ -1159,30 +1165,30 @@ schedule: "* 9-17 * * *"
 ---
 
 Important:
-*```text
+```text
 * * * * *
 
-Runs Every Minu*e
+Runs Every Minute
 
--------------------------------*
+-------------------------------
 
 0 * * * *
 
 Runs Every Hour
-At Mi*ute 0
+At Minute 0
 ```
 
 ---
 
-# 5. Creating A Jo*
+# 5. Creating A Job
 
 Command:
 
 ```bash
-kubectl create*job day31-hello \
-  --image=busybo*:1.36 \
+kubectl create job day31-hello \
+  --image=busybox:1.36 \
   -n dev \
-  -- /bin/sh -c*'echo "Job started"; date; sleep *; echo "Job completed successfully*'
+  -- /bin/sh -c 'echo "Job started"; date; sleep 2; echo "Job completed successfully"'
 ```
 
 Flow:
@@ -1191,115 +1197,116 @@ Flow:
 Job
  ↓
 Pod
- *
+
 Run Command
  ↓
-Exit*Successfully
+Exit Successfully
 ```
 
 ---
 
-# Wait For *ompletion
+# Wait For Completion
 
 ```bash
-kubectl wait --*or=condition=complete job/day31-he*lo \
+kubectl wait --for=condition=complete job/day31-hello \
   -n dev --timeout=120s
 ```
 
-*--
+---
 
 # Verify Job
 
 ```bash
-kubectl *et job day31-hello -n dev
+kubectl get job day31-hello -n dev
 ```
 
 or
-*```bash
+```bash
 kubectl get jobs -n dev
-``*
+```
 
 ---
 
 # Verify Pod
 
 ```bash
-kubec*l get pods -n dev \
-  -l job-name=*ay31-hello
+kubectl get pods -n dev \
+  -l job-name=day31-hello
 ```
 
 ---
 
 # View Logs
 
-*``bash
-kubectl logs job/day31-hell* -n dev
+```bash
+kubectl logs job/day31-hello -n dev
 ```
 
 ---
 
-# Important Fiel*s Seen In Describe Output
+# Important Fields Seen In Describe Output
 
-```text*Parallelism: 1
+```text
+Parallelism: 1
 
 Completions: 1
 
-Ba*koff Limit: 6
+Backoff Limit: 6
 ```
 
 Meaning:
 
-```te*t
+```text
 Only One Pod Runs At A Time
 
-Nee* One Successful Completion
+Need One Successful Completion
 
-Defaul* Retry Limit Is 6
+Default Retry Limit Is 6
 ```
 
 ---
 
-# 6. C*onJob Practical Concepts
+# 6. CronJob Practical Concepts
 
-Verify C*onJob:
+Verify CronJob:
 
 ```bash
-kubectl get cronjo* day31-clock -n dev
+kubectl get cronjob day31-clock -n dev
 ```
 
 ---
 
-# Ve*ify Ownership
+# Verify Ownership
 
 ```bash
-kubectl get*jobs -n dev \
-  -o custom-columns=*NAME:.metadata.name,OWNER:.metadat*.ownerReferences[0].name'
+kubectl get jobs -n dev \
+  -o custom-columns='NAME:.metadata.name,OWNER:.metadata.ownerReferences[0].name'
 ```
 
-Out*ut example:
+Output example:
 
 ```text
 OWNER
 
-day31-*lock
+day31-clock
 ```
 
 Meaning:
 
 ```text
-CronJo* Owns These Jobs
+CronJob Owns These Jobs
 ```
 
 ---
 
-Relatio*ship:
+Relationship:
 
 ```text
-day31-clock (CronJo*)
+day31-clock (CronJob)
 
       ↓
 
-day31-clock-29877772 (*ob)
+day31-clock-29877772 (Job)
 
       ↓
 
@@ -1308,149 +1315,151 @@ Pod
 
 ---
 
-# Read*ng CronJob Logs
+# Reading CronJob Logs
 
-## List Current J*bs
+## List Current Jobs
 
 ```bash
-kubectl get jobs -n de*
+kubectl get jobs -n dev
 ```
 
 ---
 
-## Show CronJob Ownersh*p
+## Show CronJob Ownership
 
 ```bash
-kubectl get jobs -n dev*\
-  -o custom-columns='NAME:.metad*ta.name,OWNER:.metadata.ownerRefer*nces[0].name'
+kubectl get jobs -n dev \
+  -o custom-columns='NAME:.metadata.name,OWNER:.metadata.ownerReferences[0].name'
 ```
 
 ---
 
-## List Po*s Created By A Job
+## List Pods Created By A Job
 
 ```bash
-kubect* get pods -n dev \
-  -l job-name=d*y31-clock-29877772
+kubectl get pods -n dev \
+  -l job-name=day31-clock-29877772
 ```
 
 ---
 
-## Re*d Logs
+## Read Logs
 
 ```bash
-kubectl logs job/d*y31-clock-29877772 -n dev
+kubectl logs job/day31-clock-29877772 -n dev
 ```
 
----*
+---
 Important:
 
 ```text
-Older CronJob*Executions
+Older CronJob Executions
 
-May Have Been Cleaned *p
+May Have Been Cleaned Up
 
-Always Use A Currently Existing*Job Name
+Always Use A Currently Existing Job Name
 ```
 
 ---
 
-# Final Practic*l Checklist
+# Final Practical Checklist
 
 ## Jobs
 
 ```bash
-kube*tl get jobs -n dev
+kubectl get jobs -n dev
 
-kubectl descri*e job day31-hello -n dev
+kubectl describe job day31-hello -n dev
 
-kubectl *ogs job/day31-hello -n dev
+kubectl logs job/day31-hello -n dev
 ```
 
---*
+---
 
 ## CronJobs
 
 ```bash
-kubectl get*cronjobs -n dev
+kubectl get cronjobs -n dev
 
-kubectl describe *ronjob day31-clock -n dev
+kubectl describe cronjob day31-clock -n dev
 
-kubectl*get jobs -n dev \
-  -o custom-colu*ns='NAME:.metadata.name,OWNER:.met*data.ownerReferences[0].name'
+kubectl get jobs -n dev \
+  -o custom-columns='NAME:.metadata.name,OWNER:.metadata.ownerReferences[0].name'
 ```
-*---
+---
 
 ## Inspect Job Pods
 
 ```bash
-*ubectl get pods -n dev \
-  -l job-*ame=day31-hello
+kubectl get pods -n dev \
+  -l job-name=day31-hello
 
-kubectl get pods *n dev \
-  -l job-name=day31-failur*
+kubectl get pods -n dev \
+  -l job-name=day31-failure
 ```
 
 ---
 
 # Day 13 Golden Rules
 
-*``text
+```text
 Deployment
       ↓
-Maintain* Desired Application Pods
+Maintain Desired Application Pods
 
--------*------------------------
+------------------------------
 
 Job
-    * ↓
+    ↓
 Runs Until Completion
 
---------*-----------------------
+------------------------------
 
 CronJob
- *    ↓
+     ↓
 Runs Jobs On Schedule
 
------*--------------------------
+------------------------------
 
-CronJo*
+CronJob
       ↓
 Creates Jobs
 
 Jobs
-      *
+      
 Manage Pods
 
---------------------*-----------
+------------------------------
 
 completions
       ↓
-T*tal Successes Required
+Total Successes Required
 
-----------*---------------------
+------------------------------
 
-parallelism*      ↓
-How Many Pods Run Together*
---------------------------------
-*backoffLimit
+parallelism
       ↓
-Retry Limit B*fore Failure
+How Many Pods Run Together
+--------------------------------
+backoffLimit
+      ↓
+Retry Limit Before Failure
 
---------------------*-----------
+------------------------------
 
-activeDeadlineSeconds*      ↓
+activeDeadlineSeconds
+      ↓
 Maximum Job Runtime
 
------*--------------------------
+------------------------------
 
-restar*Policy
+restartPolicy
       ↓
 Never / OnFailure
 
-*-------------------------------
+-------------------------------
 
-J*b Success
+Job Success
       ↓
 STATUS = Complete
 
@@ -1500,4 +1509,5 @@ Jobs
       ↓
 Create Pods
 ```
-````*
+````
+
